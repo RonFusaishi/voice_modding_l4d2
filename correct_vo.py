@@ -20,12 +20,6 @@ def shrink(duration, file_path):
 def extend(current_duration, uniform_duration, file_path):
     difference = abs(current_duration - uniform_duration)
 
-    # Remove existing o.wav, if any
-    try:
-        shutil.rmtree("o.wav")
-    except FileNotFoundError:
-        pass
-
     subprocess.run(["ffmpeg", "-i", file_path, "-af", f"apad=pad_dur={difference}", "o.wav"])
     shutil.move("o.wav", file_path)
     
@@ -88,9 +82,3 @@ except Exception as e:
 
 print("Duration successfully corrected.")
 sys.exit(0)  # Exit with a status code of 0 for successful execution
-
-
-
-    
- 
-
